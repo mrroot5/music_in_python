@@ -187,9 +187,9 @@ def get_song_data(music_notes, note_values, factor, length, decay, sustain_level
     """
     note_freqs = get_piano_notes()
     frequencies = [note_freqs[note] for note in music_notes]
-    song = np.concatenate([apply_overtones(freq, val, factor)
+    song = np.concatenate([apply_overtones(freq, val, factor, sample_rate=sample_rate)
                            for freq, val in zip(frequencies, note_values)])
-    weights = np.concatenate([get_adsr_weights(freq, val, length, decay, sustain_level)
+    weights = np.concatenate([get_adsr_weights(freq, val, length, decay, sustain_level, sample_rate=sample_rate)
                               for freq, val in zip(frequencies, note_values)])
 
     song = song * weights
